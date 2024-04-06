@@ -57,3 +57,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-04-06 10:18:32
+
+# Se establece campo de email como UNIQUE
+ALTER table employee ADD CONSTRAINT email_constraint UNIQUE (email);
