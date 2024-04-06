@@ -67,5 +67,3 @@ if (isset($delete)) {
 
 }
 
-// echo json_encode(array('success' => 'no', 'type' => $type, 'icon' => $icon, 'title' => $title, 'text' => $text));
-
