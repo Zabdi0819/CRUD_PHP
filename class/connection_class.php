@@ -13,7 +13,7 @@ class DBConnection {
         $this->host = "localhost";
         $this->user = "root";
         $this->password = "";
-        $this->db = "";
+        $this->db = "company";
 
         // Crear conexión
         $this->conn = new mysqli($this->host, $this->user, $this->password, $this->db);
