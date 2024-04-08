@@ -60,3 +60,11 @@ UNLOCK TABLES;
 
 # Se establece campo de email como UNIQUE
 ALTER table employee ADD CONSTRAINT email_constraint UNIQUE (email);
+
+# Se crea tabla de usuarios para login
+CREATE TABLE `user` (
+	id INT auto_increment NOT NULL,
+	username varchar(100) NULL,
+	password varchar(100) NULL,
+	PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
