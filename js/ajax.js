@@ -1,4 +1,4 @@
-const formularios_ajax = document.querySelectorAll(".employeeFormControl");
+const formularios_ajax = document.querySelectorAll(".sendFormControl");
 
 formularios_ajax.forEach(formularios => {
 
@@ -19,14 +19,14 @@ formularios_ajax.forEach(formularios => {
             }
         });
 
-        if(camposVacios == false){
+        if (camposVacios == false) {
             let data = new FormData(this);
             let method = this.getAttribute("method");
             let action = this.getAttribute("action");
             let name = this.getAttribute("name");
-    
+
             let encabezados = new Headers();
-    
+
             let config = {
                 method: method,
                 headers: encabezados,
@@ -34,11 +34,10 @@ formularios_ajax.forEach(formularios => {
                 cache: 'no-cache',
                 body: data
             };
-    
+
             fetch(action, config)
                 .then(respuesta => respuesta.json())
                 .then(respuesta => {
-                    // console.log(respuesta);
                     return alertas_ajax(respuesta);
                 });
         }
@@ -46,8 +45,6 @@ formularios_ajax.forEach(formularios => {
     });
 
 });
-
-
 
 function delete_ajax(name, id) {
     Swal.fire({
@@ -77,10 +74,10 @@ function delete_ajax(name, id) {
                 ...config,
                 body: params
             })
-            .then(respuesta => respuesta.json())
-            .then(respuesta => {
-                return alertas_ajax(respuesta);
-            });
+                .then(respuesta => respuesta.json())
+                .then(respuesta => {
+                    return alertas_ajax(respuesta);
+                });
         }
     });
 }
@@ -97,7 +94,33 @@ function alertas_ajax(alert) {
                 window.location.href = '?view=list';
             }
         });
+    } else if (alert.type == "logged_in") {
+        location.reload();
     }
+}
+
+function logout() {
+
+    let encabezados = new Headers();
+    let config = {
+        method: 'POST',
+        headers: encabezados,
+        mode: 'cors',
+        cache: 'no-cache',
+    };
+
+    let data = { logout: true };
+    let params = new URLSearchParams(data);
+
+    fetch('ajax/userAjax.php?', {
+        ...config,
+        body: params
+    })
+        .then(respuesta => respuesta.json())
+        .then(respuesta => {
+            location.reload();
+        });
+
 }
 
 

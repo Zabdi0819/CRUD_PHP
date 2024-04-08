@@ -34,3 +34,8 @@ footer{
 .section-container{
     width: 70%;
 }
+
+.login{
+    width: 50%;
+    margin: auto;
+}

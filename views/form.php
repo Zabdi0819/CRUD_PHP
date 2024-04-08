@@ -8,7 +8,7 @@ $action = $_GET['action'];
 $id = $_GET['id'] ? $_GET['id'] : 0;
 
 $employee = $obj_employee->fetch($id);
-$first_name= ($employee['id'] ? $employee['id'] : $_POST['first_name']);
+$first_name= ($employee['first_name'] ? $employee['first_name'] : $_POST['first_name']);
 $last_name= ($employee['last_name'] ? $employee['last_name'] : $_POST['last_name']);
 $address= ($employee['address'] ? $employee['address'] : $_POST['address']);
 $email= ($employee['email'] ? $employee['email'] : $_POST['email']);
@@ -16,7 +16,7 @@ $email= ($employee['email'] ? $employee['email'] : $_POST['email']);
 ?>
 <h1><?php echo ($action == 'add' ? 'Registrar nuevo empleado' : 'Editar empleado')?></h1>
 
-<form action="ajax/employeeAjax.php" method="POST" class="row g-3 needs-validation employeeFormControl" novalidate>
+<form action="ajax/employeeAjax.php" method="POST" class="row g-3 needs-validation sendFormControl" novalidate>
   <input type="hidden" name="action" value="<?php echo $action ?>">
   <input type="hidden" name="id" value="<?php echo $id ?>">
   <div class="col-md-6">
@@ -42,7 +42,7 @@ $email= ($employee['email'] ? $employee['email'] : $_POST['email']);
   </div>
   <div class="col-md-6">
     <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
-    <input type="email" class="form-control" name="email" id="exampleFormControlInput1" value="<?php echo $email?>" placeholder="name@example.com">
+    <input type="email" class="form-control" name="email" value="<?php echo $email?>" placeholder="name@example.com">
     <div class="invalid-feedback">
       Este campo no debe estar vacío.
     </div>

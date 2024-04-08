@@ -10,6 +10,9 @@
                 case 'form':
                     include_once('views/'.$view.'.php');
                     break;
+                case 'login':
+                    include_once('views/'.$view.'.php');
+                    break;
                     
                 default:
                     include_once('views/error.php');

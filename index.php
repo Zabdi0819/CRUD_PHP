@@ -1,7 +1,9 @@
 <?php
 require_once 'modules/router.php';
 
-$view = $_GET['view'] ? $_GET['view'] : '';
+session_start();
+
+$username = $_SESSION['username'];
 $router = new Router();
 
 ?>
@@ -20,37 +22,61 @@ $router = new Router();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="?view=list">Panel de administración</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?view=form&action=add"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
 
-    <section>
-        <div class="container text-center section-container">
-            <div class="row">
-                <div class="col">
-                    <?php
+    if (isset($username)) {
+        $view = $_GET['view'] ? $_GET['view'] : 'list';
+    ?>
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="?view=list">Panel de administración</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="?view=form&action=add"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="align-content-end btn save-btn" onClick="logout()" >Cerrar sesión</button>
+            </div>
+        </nav>
+
+        <section>
+            <div class="container text-center section-container">
+                <div class="row">
+                    <div class="col">
+                        <?php
                         $router->getView($view);
-                    ?>
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <h4>Zabdi Ramírez - © 2024</h4>
-    </footer>
+        <footer>
+            <h4>Zabdi Ramírez - © 2024</h4>
+        </footer>
+
+    <?php
+    } else {
+        $view = 'login';
+    ?>
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark"></nav>
+        <section>
+            <div class="container text-center section-container">
+                <div class="row">
+                    <div class="col">
+                        <?php
+                        $router->getView('login');
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php
+    }
+
+    ?>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
